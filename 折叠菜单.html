@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .first-menu h3,.first-menu li{
+            border: 1px solid #000;
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .sub-menu{
+            display: none;
+        }
+        .first-menu h3{
+            background: #000000;
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="meun">
+        <li class="first-menu">
+            <h3>管理区</h3>
+            <ul class="sub-menu">
+                <li>001</li>
+                <li>002</li>
+                <li>003</li>
+            </ul>
+        </li>
+        <li class="first-menu">
+            <h3>用户区</h3>
+            <ul class="sub-menu">
+                <li>001</li>
+                <li>002</li>
+                <li>003</li>
+            </ul>
+        </li>
+    </ul>
+    <script src="jquery-3.2.1.js"></script>
+    <script>
+        $(function () {
+            $('h3').on('click',function () {
+                $(this).next().stop(false,true).slideToggle(1000);
+            });
+        });
+    </script>
+</body>
+</html>

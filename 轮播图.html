@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #bod{
+            position: relative;
+            height: 410px;
+            width: 425px;
+            border: 1px solid #00ff00;
+        }
+        #big-img{
+            width: 400px;
+            height: 335px;
+            margin-bottom: 5px;
+        }
+        #big-img img{
+            position: relative;
+            left: 10px;
+            width: 420px;
+            height: 335px;
+        }
+        #sml-img{
+            overflow: hidden;
+            width: 310px;
+            height: 77px;
+            position: relative;
+            left: 70px;
+            bottom: 0px;
+        }
+        #sml-img div{
+            height: 75px;
+            width: 440px;
+            position: absolute;
+        }
+        #sml-img img{
+            width: 100px;
+            height: 75px;
+        }
+
+        #sml-img .selected{
+            border: 5px solid orange;
+        }
+        #arrows div{
+            width: 50px;
+            height: 75px;
+            position: absolute;
+            background-size: 50px 75px;
+        }
+
+        #arrows .left{
+            left: 10px;
+            background-image: url("img/left.png");
+        }
+        #arrows .right{
+            right: 0px;
+            background-image: url("img/right.png");
+
+        }
+
+        #nav span{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #000000;
+            color: #ffffff;
+            margin-left: 5px;
+            line-height: 20px;
+            text-align: center;
+        }
+        #nav{
+            width: 100px;
+            height: 25px;
+            position: absolute;
+            right: 10px;
+            top: 300px;
+        }
+        #nav .selected{
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+<div id="bod">
+    <div id="big-img">
+        <img src="img/3db3d5072ad3c35f-9d00cc9b31fca08f-b7d0a524335764ecab6c32a9b1b99287.jpg" alt="">
+    </div>
+    <div id="nav">
+        <span class="selected">1</span><span>2</span><span>3</span><span>4</span>
+    </div>
+    <div id="arrows">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <div id="sml-img">
+        <div>
+            <img class="selected" src="img/3db3d5072ad3c35f-9d00cc9b31fca08f-b7d0a524335764ecab6c32a9b1b99287.jpg" alt="">
+            <img src="img/13b5d0f75b18a3b6-02474231a63be6b9-d36583bea007e5a2a8ecedccd385cccf.jpg" alt="">
+            <img src="img/11957475_1339400293086_800x600.jpg" alt="">
+            <img src="img/61782be166c826c8-653ea5468e5789eb-be0105c5241e786e39965c43dc1ab121.jpg" alt="">
+        </div>
+    </div>
+
+</div>
+<script src="jquery-3.2.1.js"></script>
+<script>
+    $(function () {
+        var nowIndex = 0;
+        var aSmal = $('#sml-img img');
+        var oBig = $('#big-img img')[0];
+        var aNav  = $('#nav span');
+        var intv = setInterval(moveRight,1000);
+        aSmal.on('click',function () {
+            nowIndex = $(this).index();
+            changImg();
+        });
+        $('#bod').on('mouseover',alert(123));
+        aNav.on('mouseover',function () {
+            nowIndex = $(this).index();
+            changImg();
+        });
+
+        $('#arrows .left').on('click',function () {
+            if(nowIndex == 0)
+                nowIndex = 3;
+            else nowIndex--;
+            changImg();
+
+        });
+
+
+        $('#arrows .right').on('click',moveRight());
+
+
+
+        function changImg() {
+            oBig.src = aSmal[nowIndex].src;
+            $(aSmal[nowIndex]).addClass('selected').siblings().removeClass('selected');
+            $(aNav[nowIndex]).addClass('selected').siblings().removeClass('selected');
+            if(nowIndex > 1)
+                $('#sml-img div').css('left','-108px');
+            else
+                $('#sml-img div').css('left','0');
+        }
+        function moveRight() {
+            if(nowIndex == 3)
+                nowIndex = 0;
+            else nowIndex++;
+            changImg();
+
+        }
+
+    });
+</script>
+</body>
+</html>
